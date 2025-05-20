@@ -1,0 +1,47 @@
+name: Test Assignment PART A
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-submissions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"  
+
+      - name: Run Tests for All Questions
+        run: |
+          for question in 1 2 3 4; do
+            echo "Testing Question $question..."
+            cd "Submissions/A/Assignment2PartA/Q$question"
+            
+            # Iterate over all input test files
+            for input_file in sample*_in.txt; do
+              test_name="${input_file%_in.txt}"
+              expected_output="${test_name}_out.txt"
+              
+              echo "Running test: $test_name"
+              
+              # Execute the Python script with input redirected from the test file
+              python ../../q$question.py < "$input_file" > actual_output.txt
+              
+              # Compare actual output with expected output (ignoring whitespace)
+              if ! diff -w actual_output.txt "$expected_output"; then
+                echo "❌ Test $test_name (Q$question) failed!"
+                exit 1
+              else
+                echo "✅ Test $test_name (Q$question) passed."
+              fi
+            done
+            
+            cd "$GITHUB_WORKSPACE"  # Return to root directory
+          done
