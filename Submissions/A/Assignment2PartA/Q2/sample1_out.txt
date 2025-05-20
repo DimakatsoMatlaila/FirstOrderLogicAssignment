@@ -1,0 +1,4 @@
+predicates: ['P']
+functions: []
+constants: []
+variables: ['x']

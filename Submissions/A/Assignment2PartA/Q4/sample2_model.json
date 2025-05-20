@@ -1,0 +1,15 @@
+{
+  "domain": ["jump", "fish"],
+  "interpretations": {
+    "A": ["jump,jump", "jump,fish"],
+    "B": ["jump"],
+    "f": {
+      "jump,jump": "jump",
+      "jump,fish": "jump",
+      "fish,jump": "jump",
+      "fish,fish": "fish"
+    },
+    "0": "jump",
+    "1": "jump"
+  }
+}

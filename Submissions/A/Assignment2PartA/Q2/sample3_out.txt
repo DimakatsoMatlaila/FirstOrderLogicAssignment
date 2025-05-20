@@ -1,0 +1,4 @@
+predicates: ['PP']
+functions: ['a', 'aa']
+constants: ['31']
+variables: ['x', 'y']

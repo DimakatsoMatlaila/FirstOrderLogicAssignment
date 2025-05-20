@@ -1,0 +1,4 @@
+predicates: ['AA[12]', 'P']
+functions: ['fib']
+constants: ['32']
+variables: ['x']

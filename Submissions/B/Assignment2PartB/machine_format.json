@@ -1,0 +1,17 @@
+{
+    // Always will have initial, accept and reject states
+    "states": [ 0, 1, 2, ... ],
+    // Always will have blank symbol as the first symbol, but does not need to be 0
+    // Always will have end-of-tape symbol as the second symbol, but does not need to be 1
+    "alphabet": [ 0, 1, ... ], 
+    "transitions": [
+        // [ current state, read symbol, next state, write symbol, direction ]
+        // direction: L = -1, R = 1
+        [ 0, 0, 0, 0, 1 ],
+        [ 0, 1, 0, 0, -1 ],
+        ...
+    ],
+    "initial_state": 0, // Is an index into "states", will always exist in states, but does not need to be 0
+    "accept_state": 1,  // Is an index into "states", will always exist in states, but does not need to be 1
+    "reject_state": 2,  // Is an index into "states", will always exist in states, but does not need to be 2
+}

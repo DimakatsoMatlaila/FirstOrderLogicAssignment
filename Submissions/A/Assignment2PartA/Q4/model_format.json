@@ -1,0 +1,14 @@
+{
+    "domain": [ "0", "1", "2", ... ],
+    "interpretations": {
+        "s": { "0":"1", "1":"2", ... } // A function is a JSON map
+        "P": [ "0,1", "0,2", "1,2", ... ] // A predicate is a JSON array
+        // A function / predicate with arity greater than 1
+        // have the different domain elements as one string seperated by a comma
+        // Unary: "a"
+        // Binary: "a,b"
+        // Ternary: "a,b,c"
+        // etc...
+        "0": "0" // A constant is a one-to-one lookup
+    }
+}

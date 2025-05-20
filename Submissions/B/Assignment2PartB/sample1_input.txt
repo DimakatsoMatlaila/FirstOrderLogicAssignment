@@ -1,0 +1,1 @@
+{ "states": [ 0, 1, 2 ], "alphabet": [ 0, 1, 3, 4 ], "transitions": [ [ 0, 0, 0, 0, 1 ], [ 0, 1, 1, 0, -1 ], [ 0, 2, 0, 0, 1 ], [ 0, 3, 2, 0, -1 ] ], "initial_state": 0, "accept_state": 1, "reject_state": 2 }

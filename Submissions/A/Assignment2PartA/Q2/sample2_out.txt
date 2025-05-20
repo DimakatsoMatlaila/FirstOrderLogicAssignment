@@ -1,0 +1,4 @@
+predicates: ['P', 'Q']
+functions: ['s']
+constants: ['0']
+variables: ['x', 'y']

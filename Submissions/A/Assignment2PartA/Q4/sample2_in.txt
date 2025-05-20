@@ -1,0 +1,6 @@
+{ "domain": [ "jump", "fish" ], "interpretations": { "A": [ "jump,jump", "jump,fish" ], "B": [ "jump" ], "f": { "jump,jump": "jump", "jump,fish": "jump", "fish,jump": "jump", "fish,fish": "fish" }, "0": "jump", "1": "jump" } }
+#x(@y(A(x,y)))
+@x(#y(x,y))
+&(B(0),B(1))
+B(f(0,0))
+done
