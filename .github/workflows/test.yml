@@ -1,4 +1,4 @@
-name: Test Assignment PART A
+name: Test Assignment Part A
 
 on:
   push:
@@ -7,41 +7,71 @@ on:
     branches: [main]
 
 jobs:
-  test-submissions:
+  test-A-question-1:
+    name: Test Question 1
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set Up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"  
-
-      - name: Run Tests for All Questions
+          python-version: '3.11'
+      - name: Run Q1 Tests
         run: |
-          for question in 1 2 3 4; do
-            echo "Testing Question $question..."
-            cd "Submissions/A/Assignment2PartA/Q$question"
-            
-            # Iterate over all input test files
-            for input_file in sample*_in.txt; do
-              test_name="${input_file%_in.txt}"
-              expected_output="${test_name}_out.txt"
-              
-              echo "Running test: $test_name"
-              
-              # Execute the Python script with input redirected from the test file
-              python ../../q$question.py < "$input_file" > actual_output.txt
-              
-              # Compare actual output with expected output (ignoring whitespace)
-              if ! diff -w actual_output.txt "$expected_output"; then
-                echo "❌ Test $test_name (Q$question) failed!"
-                exit 1
-              else
-                echo "✅ Test $test_name (Q$question) passed."
-              fi
-            done
-            
-            cd "$GITHUB_WORKSPACE"  # Return to root directory
+          cd Submissions/A/Assignment2PartA/Q1
+          for input_file in sample*_in.txt; do
+            test_name="${input_file%_in.txt}"
+            python ../../../q1.py < "$input_file" > actual_output.txt
+            diff -w actual_output.txt "${test_name}_out.txt" || exit 1
+          done
+
+  test-A-question-2:
+    name: Test Question 2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Q2 Tests
+        run: |
+          cd Submissions/A/Assignment2PartA/Q2
+          for input_file in sample*_in.txt; do
+            test_name="${input_file%_in.txt}"
+            python ../../../q2.py < "$input_file" > actual_output.txt
+            diff -w actual_output.txt "${test_name}_out.txt" || exit 1
+          done
+
+  test-A-question-3:
+    name: Test Question 3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Q3 Tests
+        run: |
+          cd Submissions/A/Assignment2PartA/Q3
+          for input_file in sample*_in.txt; do
+            test_name="${input_file%_in.txt}"
+            python ../../../q3.py < "$input_file" > actual_output.txt
+            diff -w actual_output.txt "${test_name}_out.txt" || exit 1
+          done
+
+  test-A-question-4:
+    name: Test Question 4
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Q4 Tests
+        run: |
+          cd Submissions/A/Assignment2PartA/Q4
+          for input_file in sample*_in.txt; do
+            test_name="${input_file%_in.txt}"
+            # For Q4 that uses model JSON files
+            python ../../../q4.py < "$input_file" > actual_output.txt
+            diff -w actual_output.txt "${test_name}_out.txt" || exit 1
           done
