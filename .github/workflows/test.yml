@@ -20,7 +20,7 @@ jobs:
           cd Submissions/A/Assignment2PartA/Q1
           for input_file in sample*_in.txt; do
             test_name="${input_file%_in.txt}"
-            python ../../../q1.py < "$input_file" > actual_output.txt
+            python ../../q1.py < "$input_file" > actual_output.txt
             diff -w actual_output.txt "${test_name}_out.txt" || exit 1
           done
 
@@ -37,7 +37,7 @@ jobs:
           cd Submissions/A/Assignment2PartA/Q2
           for input_file in sample*_in.txt; do
             test_name="${input_file%_in.txt}"
-            python ../../../q2.py < "$input_file" > actual_output.txt
+            python ../../q2.py < "$input_file" > actual_output.txt
             diff -w actual_output.txt "${test_name}_out.txt" || exit 1
           done
 
@@ -54,7 +54,7 @@ jobs:
           cd Submissions/A/Assignment2PartA/Q3
           for input_file in sample*_in.txt; do
             test_name="${input_file%_in.txt}"
-            python ../../../q3.py < "$input_file" > actual_output.txt
+            python ../../q3.py < "$input_file" > actual_output.txt
             diff -w actual_output.txt "${test_name}_out.txt" || exit 1
           done
 
@@ -72,6 +72,6 @@ jobs:
           for input_file in sample*_in.txt; do
             test_name="${input_file%_in.txt}"
             # For Q4 that uses model JSON files
-            python ../../../q4.py < "$input_file" > actual_output.txt
+            python ../../q4.py < "$input_file" > actual_output.txt
             diff -w actual_output.txt "${test_name}_out.txt" || exit 1
           done
