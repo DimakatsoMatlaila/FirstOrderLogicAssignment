@@ -1,38 +1,23 @@
 import json
-
-def construct_phi_Q(machine):
-    states = sorted(machine["states"])  # Sort the states to ensure consistent order
-    n = len(states)
+def phi_Q(tm):
+    n = len(tm["states"])
+    def conj(xs):
+        r = xs[0]
+        for x in xs[1:]:
+            r = f"&({r},{x})"
+        return r
+    def disj(xs):
+        r = xs[0]
+        for x in xs[1:]:
+            r = f"|({r},{x})"
+        return r
     terms = []
-    for k in states:
-        other_states = [j for j in states if j != k]
-        neg_terms = [f"!Q[{j}](x)" for j in other_states]
-        if not neg_terms:
-            term = f"Q[{k}](x)"
-        else:
-            conj = create_conjunction(neg_terms)
-            term = f"&(Q[{k}](x),{conj})"
-        terms.append(term)
-    disj = create_disjunction(terms)
-    return f"@x({disj})" if disj else ""
+    for i in range(n):
+        negs = [f"!(Q[{j}](x))" for j in range(n) if j != i]
+        q = f"Q[{i}](x)"
+        t = q if not negs else f"&({q},{conj(negs)})"
+        terms.append(t)
+    return f"@x({disj(terms)})"
 
-def create_conjunction(terms):
-    if not terms:
-        return ""
-    conj = terms[0]
-    for term in terms[1:]:
-        conj = f"&({conj},{term})"
-    return conj
-
-def create_disjunction(terms):
-    if not terms:
-        return ""
-    disj = terms[0]
-    for term in terms[1:]:
-        disj = f"|({disj},{term})"
-    return disj
-
-if __name__ == "__main__":
-    input_json = input().strip()
-    machine = json.loads(input_json)
-    print(construct_phi_Q(machine))
+tm = json.loads(input())
+print(phi_Q(tm))
